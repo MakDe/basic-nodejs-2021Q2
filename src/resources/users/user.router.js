@@ -15,7 +15,7 @@ router.route('/:id').get(async (req, res) => {
 });
 
 router.route('/').post(async (req, res) => {
-  const user = await usersService.setUser(req.body);
+  const user = await usersService.setUser(User.fromRequest(req.body));
 
   res.status(201).json(User.toResponse(user));
 });

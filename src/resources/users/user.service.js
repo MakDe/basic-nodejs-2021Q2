@@ -8,6 +8,6 @@ const setUser = (user) => usersRepo.set(user);
 
 const removeUserById = (id) => usersRepo.removeById(id);
 
-const updateUserById = (id, data) => usersRepo.update(id, data);
+const updateUserById = (id, data) => usersRepo.updateById(id, data);
 
 module.exports = { getUsers, getUserById, setUser, removeUserById, updateUserById };

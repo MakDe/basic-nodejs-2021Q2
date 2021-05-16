@@ -1,16 +1,16 @@
 let data = [];
 
-const getAll = async () => data;
+const getAll = () => data;
 
-const getById = async (id) => data.find(item => item.id === id);
+const getById = (id) => data.find(item => item.id === id);
 
-const set = async (newData) => {
+const set = (newData) => {
   data.push(newData);
 
   return newData
 };
 
-const removeById = async (id) => {
+const removeById = (id) => {
   const removed = getById(id);
 
   data = data.filter((item) => item.id !== id);
@@ -18,14 +18,14 @@ const removeById = async (id) => {
   return removed
 };
 
-const updateById = async (id, newData) => {
+const updateById = (id, newData) => {
   const foundId = data.findIndex(
     (item) => item.id === id
   );
 
   if (foundId !== -1) {
     data = {
-      ...await getById(id),
+      ...getById(id),
       ...newData,
     };
   }
