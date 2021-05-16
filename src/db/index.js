@@ -8,7 +8,7 @@ const {
 
 const dirPath = path.join(__dirname, '/database.json');
 const db = new JSONdb(dirPath, {
-  asyncWrite: true,
+  asyncWrite: false,
   syncOnWrite: false,
 });
 

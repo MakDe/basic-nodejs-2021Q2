@@ -15,19 +15,16 @@ const set = async (data) => {
 const removeById = async (value) => {
   const removed = getById(value);
 
-  db.set(
-    TABLE_NAME_BOARDS,
-    removeBy('id', value, db.get(TABLE_NAME_BOARDS))
-  );
+  db.set(TABLE_NAME_BOARDS, removeBy('id', value, db.get(TABLE_NAME_BOARDS)));
 
   return removed;
 };
 
 const updateById = async (value, newData) => {
-  const data = replaceBy('id', value, newData, db.get(TABLE_NAME_BOARDS))
+  const data = replaceBy('id', value, newData, db.get(TABLE_NAME_BOARDS));
 
   if (data) {
-    db.set(TABLE_NAME_BOARDS, data)
+    db.set(TABLE_NAME_BOARDS, data);
   }
 
   return getById(value);

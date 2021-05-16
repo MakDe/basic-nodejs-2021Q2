@@ -7,12 +7,7 @@ const getBoard = (id) => boardRepo.getById(id);
 
 const setBoard = (board) => boardRepo.set(board);
 
-const removeBoard = async (id) => {
-  await tasksRepo.removeById(id);
-
-  return boardRepo.removeById(id);
-};
-
+const removeBoard = (id) => boardRepo.removeById(id);
 const updateBoard = (id, board) => boardRepo.updateById(id, board);
 
 module.exports = { getBoards, getBoard, setBoard, removeBoard, updateBoard };

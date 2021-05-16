@@ -24,10 +24,10 @@ const removeById = async (value) => {
 };
 
 const updateById = async (value, newData) => {
-  const data = replaceBy('id', value, newData, db.get(TABLE_NAME_USERS))
+  const data = replaceBy('id', value, newData, db.get(TABLE_NAME_USERS));
 
   if (data) {
-    db.set(TABLE_NAME_USERS, data)
+    db.set(TABLE_NAME_USERS, data);
   }
 
   return getById(value);

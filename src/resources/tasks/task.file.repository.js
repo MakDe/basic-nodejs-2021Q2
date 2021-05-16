@@ -11,15 +11,18 @@ const {
 const getAll = async (value) =>
   findByAll('boardId', value, db.get(TABLE_NAME_TASKS));
 
-const getById = async (value) => findBy('id', value, db.get(TABLE_NAME_TASKS));
+const getById = async (boardValue, taskValue) => {
+  const tasks = findByAll('boardId', boardValue, db.get(TABLE_NAME_TASKS));
+
+  return findBy('id', taskValue, tasks);
+};
 
 const setById = async (value, data) => {
-  db.set(
-    TABLE_NAME_TASKS,
-    merge({ ...data, boardId: value }, db.get(TABLE_NAME_TASKS))
-  );
+  const newData = { ...data, boardId: value };
 
-  return data;
+  db.set(TABLE_NAME_TASKS, merge(newData, db.get(TABLE_NAME_TASKS)));
+
+  return newData;
 };
 
 const removeById = async (boardValue, taskValue) => {
@@ -28,7 +31,7 @@ const removeById = async (boardValue, taskValue) => {
 
   const removed = getById(value);
 
-  await db.set(TABLE_NAME_TASKS, removeBy(key, value, db.get(TABLE_NAME_TASKS)));
+  db.set(TABLE_NAME_TASKS, removeBy(key, value, db.get(TABLE_NAME_TASKS)));
 
   return removed;
 };

@@ -1,6 +1,7 @@
 const findBy = (key, value, arr) => arr.find((item) => item[key] === value);
 
-const findByAll = (key, value, arr) => arr.filter((item) => item[key] === value);
+const findByAll = (key, value, arr) =>
+  arr.filter((item) => item[key] === value);
 
 const merge = (data, arr) => [...arr, data];
 
@@ -19,7 +20,7 @@ const replaceBy = (key, value, newData, arr) => {
     return data;
   }
 
-  return null
+  return null;
 };
 
 module.exports = {
@@ -27,5 +28,5 @@ module.exports = {
   merge,
   removeBy,
   replaceBy,
-  findByAll
+  findByAll,
 };
