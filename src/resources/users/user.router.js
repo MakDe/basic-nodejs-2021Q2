@@ -11,6 +11,8 @@ router.route('/').get(async (req, res) => {
 router.route('/:id').get(async (req, res) => {
   const user = await usersService.getUserById(req.params.id);
 
+  console.log(user)
+
   res.status(user ? 200 : 404).json(User.toResponse(user));
 });
 
