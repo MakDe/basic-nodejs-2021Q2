@@ -9,29 +9,28 @@ router.route('/').get(async (req, res) => {
 });
 
 router.route('/:id').get(async (req, res) => {
-  const user = await usersService.getUserById(req.params.id);
+  const user = await usersService.getUser(req.params.id);
 
-  console.log(user)
+  res.status(200).json(User.toResponse(user));
 
-  res.status(user ? 200 : 404).json(User.toResponse(user));
 });
 
 router.route('/').post(async (req, res) => {
-  const user = await usersService.setUser(User.fromRequest(req.body));
+  const createdUser = await usersService.setUser(User.fromRequest(req.body));
 
-  res.status(201).json(User.toResponse(user));
+  res.status(201).json(User.toResponse(createdUser));
 });
 
 router.route('/:id').delete(async (req, res) => {
-  await usersService.removeUserById(req.params.id);
+  const user = await usersService.removeUser(req.params.id);
 
-  res.status(204).json({});
+  res.status(204).json(user);
 });
 
 router.route('/:id').put(async (req, res) => {
-  const updatedUser = await usersService.updateUserById(req.body, req.params);
+  const updatedUser = await usersService.updateUser(req.params.id, User.fromRequest(req.body));
 
-  res.status(updatedUser ? 200 : 400).json(User.toResponse(updatedUser));
+  res.status(200).json(User.toResponse(updatedUser));
 });
 
 module.exports = router;

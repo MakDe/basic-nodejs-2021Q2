@@ -3,9 +3,9 @@ const uuid = require('uuid');
 class Task {
   constructor({
     id = uuid.v1(),
-    title = 'TITLE',
+    title = 'TITLE_TASK',
     order = 0,
-    description = 'DESCRIPTION',
+    description = 'DESCRIPTION_TASK',
     userId = null,
     boardId = null,
     columnId = null,

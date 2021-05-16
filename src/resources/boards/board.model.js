@@ -3,8 +3,8 @@ const uuid = require('uuid');
 class Board {
   constructor({
     id = uuid.v1(),
-    title = 'TITLE',
-    columns = { id: null, title: '', order: 0 },
+    title = 'TEST_TITLE_BOARD',
+    columns = { id: null, title: 'TEST_TITLE_COLUMN', order: 0 },
   } = {}) {
     this.id = id;
     this.title = title;
