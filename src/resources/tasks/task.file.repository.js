@@ -14,41 +14,38 @@ const getAll = async (value) =>
 const getById = async (boardValue, taskValue) => {
   const tasks = findByAll('boardId', boardValue, db.get(TABLE_NAME_TASKS));
 
-  return findBy('id', taskValue, tasks);
+  return taskValue ? findBy('id', taskValue, tasks) : tasks[0];
 };
 
 const setById = async (value, data) => {
-  const newData = { ...data, boardId: value };
+  db.set(TABLE_NAME_TASKS, merge(data, db.get(TABLE_NAME_TASKS)));
 
-  db.set(TABLE_NAME_TASKS, merge(newData, db.get(TABLE_NAME_TASKS)));
-
-  return newData;
+  return data;
 };
 
 const removeById = async (boardValue, taskValue) => {
   const key = taskValue ? 'id' : 'boardId';
-  const value = taskValue || boardValue;
+  const removing = getById(boardValue, taskValue);
 
-  const removed = getById(value);
+  if (removing) {
+    db.set(
+      TABLE_NAME_TASKS,
+      removeBy(key, taskValue || boardValue, db.get(TABLE_NAME_TASKS))
+    );
+  }
 
-  db.set(TABLE_NAME_TASKS, removeBy(key, value, db.get(TABLE_NAME_TASKS)));
 
-  return removed;
+  return removing;
 };
 
 const update = async (boardValue, taskValue, newData) => {
-  const data = replaceBy(
-    'id',
-    taskValue,
-    { ...newData, id: taskValue, boardId: boardValue },
-    db.get(TABLE_NAME_TASKS)
-  );
+  const data = replaceBy('id', taskValue, newData, db.get(TABLE_NAME_TASKS));
 
   if (data) {
     db.set(TABLE_NAME_TASKS, data);
   }
 
-  return getById(taskValue);
+  return getById(boardValue, taskValue);
 };
 
 const checkAndOverwrite = async (userId) => {

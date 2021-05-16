@@ -5,7 +5,7 @@ const boardService = require('./board.service');
 router.route('/').get(async (req, res) => {
   const boards = await boardService.getBoards();
 
-  res.status(200).send(boards);
+  await res.json(boards);
 });
 
 router.route('/:id').get(async (req, res) => {
@@ -21,15 +21,13 @@ router.route('/').post(async (req, res) => {
 });
 
 router.route('/:id').delete(async (req, res) => {
-  await boardService.removeBoard(req.params.id);
+  const board = await boardService.removeBoard(req.params.id);
 
-  res.status(204).json({});
+  res.status(204).send(board);
 });
 
 router.route('/:id').put(async (req, res) => {
-  const board = await boardService.updateBoard(
-    req.params.id,
-    Board.fromRequest(req.body)
+  const board = await boardService.updateBoard(Board.fromRequest(req.body)
   );
 
   res.status(200).send(board);

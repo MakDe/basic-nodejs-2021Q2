@@ -9,7 +9,7 @@ const setUser = (user) => usersRepo.set(user);
 
 const removeUser = (id) => {
   tasksRepo.checkAndOverwrite(id);
-  usersRepo.removeById(id);
+  return usersRepo.removeById(id);
 };
 
 const updateUser = (id, data) => usersRepo.updateById(id, data);

@@ -15,7 +15,7 @@ const set = async (data) => {
 const removeById = async (value) => {
   const removed = getById(value);
 
-  await db.set(
+  db.set(
     TABLE_NAME_USERS,
     removeBy('id', value, db.get(TABLE_NAME_USERS))
   );

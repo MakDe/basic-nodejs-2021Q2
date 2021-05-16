@@ -9,7 +9,7 @@ const {
 const dirPath = path.join(__dirname, '/database.json');
 const db = new JSONdb(dirPath, {
   asyncWrite: false,
-  syncOnWrite: false,
+  syncOnWrite: process.env.FILE_DB === 'true',
 });
 
 const createTable = (name) => {

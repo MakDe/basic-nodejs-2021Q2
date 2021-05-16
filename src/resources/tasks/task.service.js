@@ -4,10 +4,10 @@ const getTasks = (boardId) => tasksRepo.getAll(boardId);
 
 const getTask = (boardId, taskId) => tasksRepo.getById(boardId, taskId);
 
-const setTask = (boardId, task) => tasksRepo.setById(boardId, task);
+const setTask = (task) => tasksRepo.setById(task.boardId, task);
 
 const removeTask = (boardId, taskId) => tasksRepo.removeById(boardId, taskId);
 
-const updateTask = (boardId, taskId, data) => tasksRepo.update(boardId, taskId, data);
+const updateTask = (task) => tasksRepo.update(task.boardId, task.id, task);
 
 module.exports = { getTasks, getTask, setTask, removeTask, updateTask };
