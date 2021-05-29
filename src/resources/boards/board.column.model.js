@@ -1,9 +1,34 @@
 const uuid = require('uuid');
 
+/**
+ * Column Interface.
+ * @typedef IColumn
+ * @prop {string} id - Column id
+ * @prop {string} title - Column title
+ * @prop {number} order - Column order
+ */
+
+/** Class representing a column. */
 class Column {
-  constructor({ id = uuid.v1(), title, order }) {
+  /**
+   * Create a column.
+   * @param {IColumn} IColumn - Column interface
+   */
+  constructor({ id = uuid.v1(), title = '', order = 0 } = {}) {
+    /**
+     * Column id.
+     * @type {string}
+     */
     this.id = id;
+    /**
+     * Column title.
+     * @type {string}
+     */
     this.title = title;
+    /**
+     * Column order.
+     * @type {number}
+     */
     this.order = order;
   }
 }

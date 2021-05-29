@@ -1,5 +1,58 @@
 {
-    "Users": [],
-    "Boards": [],
-    "Tasks": []
+    "Users": [
+        {
+            "id": "8faa8f60-c23f-11eb-ac64-bf1cb1dbd297",
+            "name": "string",
+            "login": "string",
+            "password": "string"
+        },
+        {
+            "id": "d5b33250-c25d-11eb-bad5-d39bbffd9aab",
+            "name": "string",
+            "login": "string",
+            "password": "string"
+        },
+        {
+            "id": "63364ac0-c265-11eb-a7de-4b791a3acf75",
+            "name": "string",
+            "login": "string",
+            "password": "string"
+        },
+        {
+            "id": "64a2ac00-c265-11eb-9f97-37c15fe9f52b",
+            "name": "string",
+            "login": "string",
+            "password": "string"
+        },
+        {
+            "id": "103ea3a0-c268-11eb-8f48-4be20b63a346",
+            "name": "string",
+            "login": "string",
+            "password": "string"
+        }
+    ],
+    "Boards": [
+        {
+            "id": "9b17ab80-c23f-11eb-b8b5-9bcff019e9bb",
+            "title": "string",
+            "columns": [
+                {
+                    "id": "9b17ab81-c23f-11eb-b8b5-9bcff019e9bb",
+                    "title": "string",
+                    "order": 0
+                }
+            ]
+        }
+    ],
+    "Tasks": [
+        {
+            "id": "a9dcf350-c23f-11eb-8e3d-c3045c1b866b",
+            "title": "string",
+            "order": 0,
+            "description": "string",
+            "userId": "string",
+            "boardId": "9b17ab80-c23f-11eb-b8b5-9bcff019e9bb",
+            "columnId": "string"
+        }
+    ]
 }

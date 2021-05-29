@@ -1,4 +1,5 @@
 const { TABLE_NAME_USERS } = require('../../common/constants');
+
 const db = require('../../db');
 const { findBy, merge, removeBy, replaceBy } = require('../../helpers');
 
@@ -15,10 +16,7 @@ const set = async (data) => {
 const removeById = async (value) => {
   const removed = getById(value);
 
-  db.set(
-    TABLE_NAME_USERS,
-    removeBy('id', value, db.get(TABLE_NAME_USERS))
-  );
+  db.set(TABLE_NAME_USERS, removeBy('id', value, db.get(TABLE_NAME_USERS)));
 
   return removed;
 };
