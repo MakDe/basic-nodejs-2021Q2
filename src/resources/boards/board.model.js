@@ -4,7 +4,7 @@ const Column = require('./board.column.model');
 /**
  * Board interface.
  * @typedef IBoard
- * @prop {string} id - Board id
+ * @prop {string|number|null|undefined} id - Board id
  * @prop {string} title - Board title
  * @prop {Array<IColumn>} columns - Board columns
  */
@@ -18,7 +18,7 @@ class Board {
   constructor({ id = uuid.v1(), title = '', columns } = {}) {
     /**
      * Board id.
-     * @type {string}
+     * @type {string|number|null}
      */
     this.id = id;
     /**

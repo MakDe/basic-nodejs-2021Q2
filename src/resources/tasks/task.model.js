@@ -3,13 +3,13 @@ const uuid = require('uuid');
 /**
  * Task Interface.
  * @typedef ITask
- * @prop {string} id - Task id
+ * @prop {string|number|null|undefined} id - Task id
  * @prop {string} title - Task title
  * @prop {number} order - Task order
  * @prop {string} description - Task description
- * @prop {string} userId - User id
- * @prop {string} boardId - Board id
- * @prop {string} columnId - Column id
+ * @prop {string|number|null} userId - User id
+ * @prop {string|number|null} boardId - Board id
+ * @prop {string|number|null} columnId - Column id
  */
 
 /** Class representing a task. */
@@ -29,7 +29,7 @@ class Task {
   } = {}) {
     /**
      * Task id.
-     * @type {string}
+     * @type {string|number|null}
      */
     this.id = id;
     /**
@@ -49,17 +49,17 @@ class Task {
     this.description = description;
     /**
      * Task userId.
-     * @type {string}
+     * @type {string|number|null}
      */
     this.userId = userId;
     /**
      * Task boardId.
-     * @type {string}
+     * @type {string|number|null}
      */
     this.boardId = boardId;
     /**
      * Task columnId.
-     * @type {string}
+     * @type {string|number|null}
      */
     this.columnId = columnId;
   }

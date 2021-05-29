@@ -12,6 +12,10 @@ const db = new JSONdb(dirPath, {
   syncOnWrite: process.env.FILE_DB === 'true',
 });
 
+/** Create table in db.
+ * @param {string} name - Table name.
+ * @return {void}
+ */
 const createTable = (name) => {
   if (!db.has(name)) {
     db.set(name, []);

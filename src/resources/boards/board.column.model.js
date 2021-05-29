@@ -3,7 +3,7 @@ const uuid = require('uuid');
 /**
  * Column Interface.
  * @typedef IColumn
- * @prop {string} id - Column id
+ * @prop {string|number|null|undefined} id - Column id
  * @prop {string} title - Column title
  * @prop {number} order - Column order
  */
@@ -17,7 +17,7 @@ class Column {
   constructor({ id = uuid.v1(), title = '', order = 0 } = {}) {
     /**
      * Column id.
-     * @type {string}
+     * @type {string|number|null}
      */
     this.id = id;
     /**

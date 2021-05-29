@@ -19,7 +19,7 @@ const getTask = (boardId, taskId) => tasksRepo.getById(boardId, taskId);
  * @param {ITask} task - Addable task
  * @return {Promise<ITask>} - Added task
  */
-const setTask = (task) => tasksRepo.setById(task.boardId, task);
+const setTask = (task) => tasksRepo.setById(task);
 
 /**
  * Delete task.

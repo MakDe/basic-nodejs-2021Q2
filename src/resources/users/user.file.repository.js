@@ -3,32 +3,59 @@ const { TABLE_NAME_USERS } = require('../../common/constants');
 const db = require('../../db');
 const { findBy, merge, removeBy, replaceBy } = require('../../helpers');
 
-const getAll = async () => db.get(TABLE_NAME_USERS);
+/** Get all users from db.
+ * @return {Array<IUserHidden>} - Users
+ */
+const dbUsersGetAll = async () => db.get(TABLE_NAME_USERS);
 
-const getById = async (value) => findBy('id', value, db.get(TABLE_NAME_USERS));
+/** Get user by id from db.
+ * @param {string} value - User id
+ * @return {IUserHidden} - User
+ */
+const dbUsersGetById = async (value) =>
+  findBy('id', value, db.get(TABLE_NAME_USERS));
 
-const set = async (data) => {
+/** Add user to db.
+ * @param {IUser} data - Addable user
+ * @return {IUserHidden} - Added user
+ */
+const dbUsersSet = async (data) => {
   db.set(TABLE_NAME_USERS, merge(data, db.get(TABLE_NAME_USERS)));
 
   return data;
 };
 
-const removeById = async (value) => {
-  const removed = getById(value);
+/** Delete user from db.
+ * @param {string} value - User id
+ * @return {IUserHidden} - Removed user
+ */
+const dbUsersRemoveById = async (value) => {
+  const removed = dbUsersGetById(value);
 
   db.set(TABLE_NAME_USERS, removeBy('id', value, db.get(TABLE_NAME_USERS)));
 
   return removed;
 };
 
-const updateById = async (value, newData) => {
+/** Update user in db.
+ * @param {string} value - User id
+ * @param {IUser} newData - New user data
+ * @return {IUserHidden} - Updated User
+ */
+const dbUsersUpdateById = async (value, newData) => {
   const data = replaceBy('id', value, newData, db.get(TABLE_NAME_USERS));
 
   if (data) {
     db.set(TABLE_NAME_USERS, data);
   }
 
-  return getById(value);
+  return dbUsersGetById(value);
 };
 
-module.exports = { getAll, getById, set, removeById, updateById };
+module.exports = {
+  getAll: dbUsersGetAll,
+  getById: dbUsersGetById,
+  set: dbUsersSet,
+  removeById: dbUsersRemoveById,
+  updateById: dbUsersUpdateById,
+};

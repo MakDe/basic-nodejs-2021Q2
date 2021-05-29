@@ -3,27 +3,27 @@ const tasksRepo = require('../tasks/task.file.repository');
 
 /**
  * Get all users.
- * @return {Promise<Array<IUser>>} - Get all users
+ * @return {Promise<Array<IUserHidden>>} - Get all users
  */
 const getUsers = () => usersRepo.getAll();
 
 /** Get user by id.
  * @param {string} id - User id
- * @return {Promise<IUser>} - User
+ * @return {Promise<IUserHidden>} - User
  */
 const getUser = (id) => usersRepo.getById(id);
 
 /**
  * Add user.
  * @param {IUser} user - Addable user
- * @return {Promise<IUser>} - Added user
+ * @return {Promise<IUserHidden>} - Added user
  */
 const setUser = (user) => usersRepo.set(user);
 
 /**
  * Delete user.
  * @param {string} id - User id
- * @return {Promise<IUser>} - Removed user
+ * @return {Promise<IUserHidden>} - Removed user
  */
 const removeUser = (id) => {
   tasksRepo.checkAndOverwrite(id);
@@ -35,7 +35,7 @@ const removeUser = (id) => {
  * Update user.
  * @param {string} id - User id
  * @param {IUser} data - Updatable user
- * @return {Promise<IUser>} - Updated user
+ * @return {Promise<IUserHidden>} - Updated user
  */
 const updateUser = (id, data) => usersRepo.updateById(id, data);
 

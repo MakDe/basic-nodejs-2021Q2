@@ -3,7 +3,7 @@ const uuid = require('uuid');
 /**
  * User interface.
  * @typedef IUser
- * @prop {string} id - User id
+ * @prop {string|number|null|undefined} id - User id
  * @prop {string} name - User name
  * @prop {string} login - User login
  * @prop {string} password - User password
@@ -12,7 +12,7 @@ const uuid = require('uuid');
 /**
  * User interface without public properties.
  * @typedef IUserHidden
- * @prop {string} id - User id
+ * @prop {string|number|null} id - User id
  * @prop {string} name - User name
  * @prop {string} login - User login
  */
@@ -26,7 +26,7 @@ class User {
   constructor({ id = uuid.v1(), name = '', login = '', password = '' } = {}) {
     /**
      * User id.
-     * @type {string}
+     * @type {string|number|null}
      */
     this.id = id;
     /**

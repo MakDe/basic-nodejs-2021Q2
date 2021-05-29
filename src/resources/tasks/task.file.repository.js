@@ -8,47 +8,74 @@ const {
   findByAll,
 } = require('../../helpers');
 
-const getAll = async (value) =>
+/** Get all tasks from db.
+ * @param {string} value - Board id
+ * @return {Array<ITask>} - Tasks
+ */
+const dbTasksGetAll = async (value) =>
   findByAll('boardId', value, db.get(TABLE_NAME_TASKS));
 
-const getById = async (boardValue, taskValue) => {
+/** Get task by ids from db.
+ * @param {string} boardValue - Board id
+ * @param {string | undefined} taskValue - Task id
+ * @return {ITask} - Task
+ */
+const dbTasksGetById = async (boardValue, taskValue) => {
   const tasks = findByAll('boardId', boardValue, db.get(TABLE_NAME_TASKS));
 
   return taskValue ? findBy('id', taskValue, tasks) : tasks[0];
 };
 
-const setById = async (value, data) => {
+/** Add task to db.
+ * @param {ITask} data - Addable task
+ * @return {ITask} - Added task
+ */
+const dbTasksSetById = async (data) => {
   db.set(TABLE_NAME_TASKS, merge(data, db.get(TABLE_NAME_TASKS)));
 
   return data;
 };
 
-const removeById = async (boardValue, taskValue) => {
+/** Delete task from db.
+ * @param {string} boardValue - Board id
+ * @param {string | undefined} taskValue - Task id
+ * @return {ITask} - Removed task
+ */
+const dbTasksRemoveById = async (boardValue, taskValue) => {
   const key = taskValue ? 'id' : 'boardId';
-  const removing = getById(boardValue, taskValue);
+  const removed = dbTasksGetById(boardValue, taskValue);
 
-  if (removing) {
+  if (removed) {
     db.set(
       TABLE_NAME_TASKS,
       removeBy(key, taskValue || boardValue, db.get(TABLE_NAME_TASKS))
     );
   }
 
-
-  return removing;
+  return removed;
 };
 
-const update = async (boardValue, taskValue, newData) => {
+/** Update task in db.
+ * @param {string} boardValue - Board id
+ * @param {string} taskValue - Task id
+ * @param {ITask} newData - New task data
+ * @return {ITask} - Updated Task
+ */
+const dbTasksUpdate = async (boardValue, taskValue, newData) => {
   const data = replaceBy('id', taskValue, newData, db.get(TABLE_NAME_TASKS));
 
   if (data) {
     db.set(TABLE_NAME_TASKS, data);
   }
 
-  return getById(boardValue, taskValue);
+  return dbTasksGetById(boardValue, taskValue);
 };
 
-const checkAndOverwrite = async (userId) => {
+/** Check and nullify userId values in db.
+ * @param {string} userId - User id
+ * @return {void}
+ */
+const dbTasksCheckAndOverwrite = async (userId) => {
   const data = db.get(TABLE_NAME_TASKS);
 
   const newData = data.map((task) => {
@@ -66,10 +93,10 @@ const checkAndOverwrite = async (userId) => {
 };
 
 module.exports = {
-  getAll,
-  getById,
-  setById,
-  removeById,
-  update,
-  checkAndOverwrite,
+  getAll: dbTasksGetAll,
+  getById: dbTasksGetById,
+  setById: dbTasksSetById,
+  removeById: dbTasksRemoveById,
+  update: dbTasksUpdate,
+  checkAndOverwrite: dbTasksCheckAndOverwrite,
 };
