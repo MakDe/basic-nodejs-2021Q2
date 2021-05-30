@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import { v1 as uuidv1 } from 'uuid';
 import { IUser, IUserHidden } from './user.types';
 
 /**
@@ -32,7 +32,7 @@ class User {
    * Create a user.
    * @param {IUser} IUser - User interface
    */
-  constructor({ id = uuid.v1(), name = '', login = '', password = '' }: IUser) {
+  constructor({ id = uuidv1(), name = '', login = '', password = '' }: IUser) {
     /**
      * User id.
      * @type {string|number|null}

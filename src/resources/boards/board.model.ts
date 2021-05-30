@@ -1,4 +1,6 @@
-import uuid from 'uuid';
+import { v1 as uuidv1 } from 'uuid';
+import { IColumn } from 'src/resources/boards/board.column.types';
+import { IBoard } from 'src/resources/boards/board.types';
 import Column from './board.column.model';
 
 /**
@@ -11,11 +13,16 @@ import Column from './board.column.model';
 
 /** Class representing a board. */
 class Board {
+  id: string | number | null;
+
+  title: string;
+
+  columns: IColumn[];
   /**
    * Create a board.
    * @param {IBoard} IBoard - Board interface
    */
-  constructor({ id = uuid.v1(), title = '', columns } = {}) {
+  constructor({ id = uuidv1(), title = '', columns }: IBoard) {
     /**
      * Board id.
      * @type {string|number|null}
@@ -41,7 +48,7 @@ class Board {
    * @param {IBoard} body - The data from which the new board will be created
    * @return {IBoard} - Created board
    */
-  static fromRequest(body) {
+  static fromRequest(body: IBoard): IBoard {
     return new Board(body);
   }
 }

@@ -7,7 +7,7 @@ const router = express.Router({ mergeParams: true });
 /**
  * Get tasks
  */
-router.route('/').get(async (req, res) => {
+router.route('/:boardId/tasks').get(async (req, res) => {
   const tasks = await taskService.getTasks(req.params.boardId);
 
   await res.json(tasks);
@@ -16,7 +16,7 @@ router.route('/').get(async (req, res) => {
 /**
  * Get task by id
  */
-router.route('/:id').get(async (req, res) => {
+router.route('/:boardId/tasks/:id').get(async (req, res) => {
   const task = await taskService.getTask(req.params.boardId, req.params.id);
 
   res.status(task ? 200 : 404).send(task);
@@ -25,7 +25,7 @@ router.route('/:id').get(async (req, res) => {
 /**
  *  Create task
  */
-router.route('/').post(async (req, res) => {
+router.route('/:boardId/tasks').post(async (req, res) => {
   const task = await taskService.setTask(
     Task.fromRequest({ ...req.body, boardId: req.params.boardId })
   );
@@ -36,7 +36,7 @@ router.route('/').post(async (req, res) => {
 /**
  *  Delete task by id
  */
-router.route('/:id').delete(async (req, res) => {
+router.route('/:boardId/tasks/:id').delete(async (req, res) => {
   await taskService.removeTask(req.params.boardId, req.params.id);
 
   res.sendStatus(204);
@@ -45,7 +45,7 @@ router.route('/:id').delete(async (req, res) => {
 /**
  * Update task
  */
-router.route('/:id').put(async (req, res) => {
+router.route('/:boardId/tasks/:id').put(async (req, res) => {
   const task = await taskService.updateTask(
     Task.fromRequest({
       ...req.body,

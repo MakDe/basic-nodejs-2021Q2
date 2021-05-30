@@ -11,9 +11,9 @@ const dbUsersGetAll = async (): Promise<Array<IUser>> =>
 
 /** Get user by id from db.
  * @param {string} value - User id
- * @return {IUser} - User
+ * @return {IUser | null} - User
  */
-const dbUsersGetById = async (value: string): Promise<IUser> =>
+const dbUsersGetById = async (value: string): Promise<IUser | null> =>
   findBy('id', value, <Array<IUser>>db.get(TABLE_NAME_USERS));
 
 /** Add user to db.
@@ -28,9 +28,9 @@ const dbUsersSet = async (data: IUser): Promise<IUser> => {
 
 /** Delete user from db.
  * @param {string} value - User id
- * @return {IUser} - Removed user
+ * @return {IUser | null} - Removed user
  */
-const dbUsersRemoveById = async (value: string): Promise<IUser> => {
+const dbUsersRemoveById = async (value: string): Promise<IUser | null> => {
   const removed = dbUsersGetById(value);
 
   db.set(
@@ -44,12 +44,12 @@ const dbUsersRemoveById = async (value: string): Promise<IUser> => {
 /** Update user in db.
  * @param {string} value - User id
  * @param {IUser} newData - New user data
- * @return {IUser} - Updated User
+ * @return {IUser | null} - Updated User
  */
 const dbUsersUpdateById = async (
   value: string,
   newData: IUser
-): Promise<IUser> => {
+): Promise<IUser | null> => {
   const data = replaceBy(
     'id',
     value,

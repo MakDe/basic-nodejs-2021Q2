@@ -1,0 +1,12 @@
+{
+    "Users": [
+        {
+            "id": "6d345460-c353-11eb-a60e-f9f5e68f9c70",
+            "name": "string",
+            "login": "string",
+            "password": "string"
+        }
+    ],
+    "Boards": [],
+    "Tasks": []
+}

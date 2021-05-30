@@ -7,7 +7,7 @@ const router = express.Router();
 /**
  * Get boards
  */
-router.route('/').get(async (req, res) => {
+router.route('/').get(async (_, res) => {
   const boards = await boardService.getBoards();
 
   await res.json(boards);

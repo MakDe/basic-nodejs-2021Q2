@@ -19,19 +19,8 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
-    "paths": {
-      "src/*": ["src/*"]
-    }
+    "baseUrl": "."
   },
-  "exclude": [
-    "node_modules/",
-    "build",
-    "test",
-    "doc",
-    "docs"
-  ],
-  "include": [
-    "./src/**/*.ts"
-  ]
+  "exclude": ["node_modules/", "build", "test", "doc", "docs"],
+  "include": ["./src/**/*.ts"]
 }

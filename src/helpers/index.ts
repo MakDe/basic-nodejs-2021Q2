@@ -4,17 +4,24 @@
  * @param {Array<Object<string,string|number|null>>} arr - The array by which to search
  * @return {Object<string,string|number>|undefined} - Finded object
  */
-const utilFindBy = <T, U>(key: string, value: T, arr: U[]): U =>
-  arr.find((item) => item[key] === value);
-
+const utilFindBy = <T, P extends keyof T>(
+  key: P,
+  value: T[P],
+  arr: T[]
+): T | null => {
+  return arr.filter((item) => item[key] === value)[0] || null;
+};
 /** Find objects by key value.
  * @param {string} key - Key
  * @param {string|number|null} value - Value
  * @param {Array<Object<string,string|number|null>>} arr - The array by which to search
  * @return {Array<Object<string,string|number|null>>} - Finded objects
  */
-const utilFindByAll = <T, U>(key: string, value: T, arr: U[]): U[] =>
-  arr.filter((item) => item[key] === value);
+const utilFindByAll = <T, P extends keyof T>(
+  key: P,
+  value: T[P],
+  arr: T[]
+): T[] => arr.filter((item) => item[key] === value);
 
 /** Merge object with array objects.
  * @param {Object<string,string|number|null>} data - Object
@@ -29,8 +36,11 @@ const utilMerge = <T>(data: T, arr: T[]): T[] => [...arr, data];
  * @param {Array<Object<string,string|number|null>>} arr - The array in which to replace the object
  * @return {Array<Object<string,string|number|null>>} - Filtered array
  */
-const utilRemoveBy = (key, value, arr) =>
-  arr.filter((item) => item[key] !== value);
+const utilRemoveBy = <T, P extends keyof T>(
+  key: P,
+  value: T[P],
+  arr: T[]
+): T[] => arr.filter((item) => item[key] !== value);
 
 /** Replace object in array by key value.
  * @param {string} key - Key
@@ -39,7 +49,12 @@ const utilRemoveBy = (key, value, arr) =>
  * @param {Array<Object<string,string|number|null>>} arr - The array by which to search
  * @return {Array<Object<string,string|number|null>>|null} - Modified array or null if nothing was found
  */
-const utilReplaceBy = (key, value, newData, arr) => {
+const utilReplaceBy = <T, P extends keyof T>(
+  key: P,
+  value: T[P],
+  newData: T,
+  arr: T[]
+): T[] | null => {
   const data = arr;
   const index = data.findIndex((item) => item[key] === value);
 

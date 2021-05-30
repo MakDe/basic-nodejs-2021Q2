@@ -1,4 +1,5 @@
-import uuid from 'uuid';
+import { v1 as uuidv1 } from 'uuid';
+import { ITask } from 'src/resources/tasks/task.types';
 
 /**
  * Task Interface.
@@ -14,19 +15,26 @@ import uuid from 'uuid';
 
 /** Class representing a task. */
 class Task {
+  id: string | number | null;
+  title: string;
+  order: number;
+  description: string;
+  userId: string | number | null;
+  boardId: string | number | null;
+  columnId: string | number | null;
   /**
-   * Create a taks.
+   * Create a task.
    * @param {ITask} ITask - Task interface
    */
   constructor({
-    id = uuid.v1(),
+    id = uuidv1(),
     title = '',
     order = 0,
     description = '',
     userId = '',
     boardId = '',
     columnId = '',
-  } = {}) {
+  }: ITask) {
     /**
      * Task id.
      * @type {string|number|null}
@@ -69,7 +77,7 @@ class Task {
    * @param {ITask} body - The data from which the new task will be created
    * @return {ITask} - Created task
    */
-  static fromRequest(body) {
+  static fromRequest(body: ITask): ITask {
     return new Task(body);
   }
 }
