@@ -1,5 +1,17 @@
-const usersRepo = require('./user.memory.repository');
+const usersRepo = require('./user.file.repository');
+const tasksRepo = require('../tasks/task.file.repository');
 
-const getAll = () => usersRepo.getAll();
+const getUsers = () => usersRepo.getAll();
 
-module.exports = { getAll };
+const getUser = (id) => usersRepo.getById(id);
+
+const setUser = (user) => usersRepo.set(user);
+
+const removeUser = (id) => {
+  tasksRepo.checkAndOverwrite(id);
+  return usersRepo.removeById(id);
+};
+
+const updateUser = (id, data) => usersRepo.updateById(id, data);
+
+module.exports = { getUsers, getUser, setUser, removeUser, updateUser };

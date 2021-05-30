@@ -17,6 +17,12 @@ git clone {repository URL}
 npm install
 ```
 
+## Running application with JsonDb
+
+```
+npm run start:filedb
+```
+
 ## Running application
 
 ```
