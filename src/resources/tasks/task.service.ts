@@ -1,4 +1,4 @@
-const tasksRepo = require('./task.file.repository');
+import * as tasksRepo from './task.file.repository';
 
 /**
  * Get all tasks.
@@ -36,4 +36,4 @@ const removeTask = (boardId, taskId) => tasksRepo.removeById(boardId, taskId);
  */
 const updateTask = (task) => tasksRepo.update(task.boardId, task.id, task);
 
-module.exports = { getTasks, getTask, setTask, removeTask, updateTask };
+export { getTasks, getTask, setTask, removeTask, updateTask };

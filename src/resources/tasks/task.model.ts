@@ -1,4 +1,4 @@
-const uuid = require('uuid');
+import uuid from 'uuid';
 
 /**
  * Task Interface.
@@ -74,4 +74,4 @@ class Task {
   }
 }
 
-module.exports = Task;
+export default Task;

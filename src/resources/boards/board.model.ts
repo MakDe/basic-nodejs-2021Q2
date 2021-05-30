@@ -1,5 +1,5 @@
-const uuid = require('uuid');
-const Column = require('./board.column.model');
+import uuid from 'uuid';
+import Column from './board.column.model';
 
 /**
  * Board interface.
@@ -46,4 +46,4 @@ class Board {
   }
 }
 
-module.exports = Board;
+export default Board;

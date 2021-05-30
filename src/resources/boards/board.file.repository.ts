@@ -1,6 +1,6 @@
-const { TABLE_NAME_BOARDS } = require('../../common/constants');
-const db = require('../../db');
-const { findBy, merge, removeBy, replaceBy } = require('../../helpers');
+import { TABLE_NAME_BOARDS } from '../../common/constants';
+import db from '../../db';
+import { findBy, merge, removeBy, replaceBy } from '../../helpers';
 
 /** Get all boards from db.
  * @return {Array<IBoard>} - Boards
@@ -51,10 +51,10 @@ const dbBoardsUpdateById = async (value, newData) => {
   return dbBoardsGetById(value);
 };
 
-module.exports = {
-  getAll: dbBoardsGetAll,
-  getById: dbBoardsGetById,
-  set: dbBoardsSet,
-  removeById: dbBoardsRemoveById,
-  updateById: dbBoardsUpdateById,
+export {
+  dbBoardsGetAll as getAll,
+  dbBoardsGetById as getById,
+  dbBoardsSet as set,
+  dbBoardsRemoveById as removeById,
+  dbBoardsUpdateById as updateById,
 };

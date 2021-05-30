@@ -4,7 +4,8 @@
  * @param {Array<Object<string,string|number|null>>} arr - The array by which to search
  * @return {Object<string,string|number>|undefined} - Finded object
  */
-const utilFindBy = (key, value, arr) => arr.find((item) => item[key] === value);
+const utilFindBy = <T, U>(key: string, value: T, arr: U[]): U =>
+  arr.find((item) => item[key] === value);
 
 /** Find objects by key value.
  * @param {string} key - Key
@@ -12,7 +13,7 @@ const utilFindBy = (key, value, arr) => arr.find((item) => item[key] === value);
  * @param {Array<Object<string,string|number|null>>} arr - The array by which to search
  * @return {Array<Object<string,string|number|null>>} - Finded objects
  */
-const utilFindByAll = (key, value, arr) =>
+const utilFindByAll = <T, U>(key: string, value: T, arr: U[]): U[] =>
   arr.filter((item) => item[key] === value);
 
 /** Merge object with array objects.
@@ -20,7 +21,7 @@ const utilFindByAll = (key, value, arr) =>
  * @param {Array<Object<string,string|number|null>>} arr - Start array
  * @return {Array<Object<string,string|number|null>>} - Final array
  */
-const utilMerge = (data, arr) => [...arr, data];
+const utilMerge = <T>(data: T, arr: T[]): T[] => [...arr, data];
 
 /** Delete object(s) by key value.
  * @param {string} key - Key
@@ -54,10 +55,10 @@ const utilReplaceBy = (key, value, newData, arr) => {
   return null;
 };
 
-module.exports = {
-  findBy: utilFindBy,
-  findByAll: utilFindByAll,
-  merge: utilMerge,
-  removeBy: utilRemoveBy,
-  replaceBy: utilReplaceBy,
+export {
+  utilFindBy as findBy,
+  utilFindByAll as findByAll,
+  utilMerge as merge,
+  utilRemoveBy as removeBy,
+  utilReplaceBy as replaceBy,
 };

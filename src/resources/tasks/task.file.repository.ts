@@ -1,12 +1,7 @@
-const { TABLE_NAME_TASKS } = require('../../common/constants');
-const db = require('../../db');
-const {
-  findBy,
-  merge,
-  removeBy,
-  replaceBy,
-  findByAll,
-} = require('../../helpers');
+import { TABLE_NAME_TASKS } from '../../common/constants';
+import db from '../../db';
+
+import { findBy, merge, removeBy, replaceBy, findByAll } from '../../helpers';
 
 /** Get all tasks from db.
  * @param {string} value - Board id
@@ -92,11 +87,11 @@ const dbTasksCheckAndOverwrite = async (userId) => {
   db.set(TABLE_NAME_TASKS, newData);
 };
 
-module.exports = {
-  getAll: dbTasksGetAll,
-  getById: dbTasksGetById,
-  setById: dbTasksSetById,
-  removeById: dbTasksRemoveById,
-  update: dbTasksUpdate,
-  checkAndOverwrite: dbTasksCheckAndOverwrite,
+export {
+  dbTasksGetAll as getAll,
+  dbTasksGetById as getById,
+  dbTasksSetById as setById,
+  dbTasksRemoveById as removeById,
+  dbTasksUpdate as update,
+  dbTasksCheckAndOverwrite as checkAndOverwrite,
 };

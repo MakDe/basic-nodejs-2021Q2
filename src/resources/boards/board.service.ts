@@ -1,5 +1,5 @@
-const boardRepo = require('./board.file.repository');
-const tasksRepo = require('../tasks/task.file.repository');
+import * as boardRepo from './board.file.repository';
+import * as tasksRepo from '../tasks/task.file.repository';
 
 /**
  * Get all boards.
@@ -38,4 +38,4 @@ const removeBoard = (id) => {
  */
 const updateBoard = (board) => boardRepo.updateById(board.id, board);
 
-module.exports = { getBoards, getBoard, setBoard, removeBoard, updateBoard };
+export { getBoards, getBoard, setBoard, removeBoard, updateBoard };

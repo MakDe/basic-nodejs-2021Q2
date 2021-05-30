@@ -1,9 +1,10 @@
-const uuid = require('uuid');
+import uuid from 'uuid';
+import { IUser, IUserHidden } from './user.types';
 
 /**
  * User interface.
  * @typedef IUser
- * @prop {string|number|null|undefined} id - User id
+ * @prop {string|number|null} id - User id
  * @prop {string} name - User name
  * @prop {string} login - User login
  * @prop {string} password - User password
@@ -19,11 +20,19 @@ const uuid = require('uuid');
 
 /** Class representing a user. */
 class User {
+  id: string | number | null;
+
+  name: string;
+
+  login: string;
+
+  password: string;
+
   /**
    * Create a user.
    * @param {IUser} IUser - User interface
    */
-  constructor({ id = uuid.v1(), name = '', login = '', password = '' } = {}) {
+  constructor({ id = uuid.v1(), name = '', login = '', password = '' }: IUser) {
     /**
      * User id.
      * @type {string|number|null}
@@ -51,7 +60,7 @@ class User {
    * @param {IUser} user - User instance
    * @return {IUserHidden} - User instance without public properties
    */
-  static toResponse(user) {
+  static toResponse(user: IUser): IUserHidden {
     const { id, name, login } = user;
     return { id, name, login };
   }
@@ -61,9 +70,9 @@ class User {
    * @param {IUser} body - The data from which the new user will be created
    * @return {IUser} - Created user
    */
-  static fromRequest(body) {
+  static fromRequest(body: IUser): IUser {
     return new User(body);
   }
 }
 
-module.exports = User;
+export default User;

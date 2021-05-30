@@ -1,22 +1,28 @@
-const JSONdb = require('simple-json-db');
-const path = require('path');
-const {
+import JSONdb from 'simple-json-db';
+import path from 'path';
+import { FILE_DB } from '../common/config';
+import {
   TABLE_NAME_USERS,
   TABLE_NAME_BOARDS,
   TABLE_NAME_TASKS,
-} = require('../common/constants');
+} from '../common/constants';
 
 const dirPath = path.join(__dirname, '/database.json');
 const db = new JSONdb(dirPath, {
   asyncWrite: false,
-  syncOnWrite: process.env.FILE_DB === 'true',
+  syncOnWrite: FILE_DB,
 });
 
 /** Create table in db.
  * @param {string} name - Table name.
  * @return {void}
  */
-const createTable = (name) => {
+const createTable = (
+  name:
+    | typeof TABLE_NAME_USERS
+    | typeof TABLE_NAME_BOARDS
+    | typeof TABLE_NAME_TASKS
+) => {
   if (!db.has(name)) {
     db.set(name, []);
   }
@@ -26,4 +32,4 @@ createTable(TABLE_NAME_USERS);
 createTable(TABLE_NAME_BOARDS);
 createTable(TABLE_NAME_TASKS);
 
-module.exports = db;
+export default db;

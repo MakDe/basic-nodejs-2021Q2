@@ -1,4 +1,4 @@
-const uuid = require('uuid');
+import uuid from 'uuid';
 
 /**
  * Column Interface.
@@ -33,4 +33,4 @@ class Column {
   }
 }
 
-module.exports = Column;
+export default Column;
