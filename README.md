@@ -22,7 +22,7 @@ npm install
 ```
 npm run start:filedb
 ```
-
+Внимание! Не запускайте тесты в этом режиме.
 ## Running application
 
 ```
