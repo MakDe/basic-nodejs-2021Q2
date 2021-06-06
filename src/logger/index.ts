@@ -2,7 +2,7 @@ import winston from 'winston';
 import { LOGS_COMBINED_PATH, LOGS_ERROR_PATH } from '../common/constants';
 
 const logger = winston.createLogger({
-  level: 'info',
+  level: 'http',
   format: winston.format.json(),
   transports: [
     new winston.transports.Console({

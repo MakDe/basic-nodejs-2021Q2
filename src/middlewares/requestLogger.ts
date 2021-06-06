@@ -4,11 +4,11 @@ import logger from '../logger';
 
 const requestLogger: RequestHandler = (req, res, next): void => {
   const { method, url, params, query, body } = req;
-  const { statusCode } = res;
 
   next();
 
   finished(req, res, () => {
+    const { statusCode } = res;
     logger.log(
       'info',
       `${method} ${url} code: ${statusCode} params: ${JSON.stringify(
