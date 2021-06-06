@@ -12,7 +12,7 @@ import Column from './board.column.model';
  */
 
 /** Class representing a board. */
-class Board {
+class Board implements IBoard {
   id: string | number | null;
 
   title: string;

@@ -19,7 +19,7 @@ import { IUser, IUserHidden } from './user.types';
  */
 
 /** Class representing a user. */
-class User {
+class User implements IUser {
   id: string | number | null;
 
   name: string;
