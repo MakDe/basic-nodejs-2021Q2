@@ -6,7 +6,7 @@ export type IUser = {
 };
 
 export type IUserHidden = {
-  id?: string | number | null;
+  id?: string | number | null | undefined;
   name: string;
   login: string;
 };
