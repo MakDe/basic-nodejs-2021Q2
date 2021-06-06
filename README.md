@@ -16,7 +16,10 @@ git clone {repository URL}
 ```
 npm install
 ```
-
+## Логи
+```
+./logs
+```
 ## Running application with JsonDb
 
 ```
