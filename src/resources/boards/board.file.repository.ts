@@ -1,5 +1,5 @@
 import { TABLE_NAME_BOARDS } from '../../common/constants';
-import db from '../../db';
+import db from '../../../db';
 import { findBy, merge, removeBy, replaceBy } from '../../helpers';
 import { IBoard } from './board.types';
 

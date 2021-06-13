@@ -1,6 +1,6 @@
 import { ITask } from 'src/resources/tasks/task.types';
 import { TABLE_NAME_TASKS } from '../../common/constants';
-import db from '../../db';
+import db from '../../../db';
 
 import { findBy, merge, removeBy, replaceBy, findByAll } from '../../helpers';
 

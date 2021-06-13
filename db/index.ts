@@ -1,11 +1,11 @@
 import JSONdb from 'simple-json-db';
 import path from 'path';
-import { FILE_DB } from '../common/config';
+import { FILE_DB } from '../src/common/config';
 import {
   TABLE_NAME_USERS,
   TABLE_NAME_BOARDS,
   TABLE_NAME_TASKS,
-} from '../common/constants';
+} from '../src/common/constants';
 
 const dirPath = path.join(__dirname, '/database.json');
 const db = new JSONdb(dirPath, {

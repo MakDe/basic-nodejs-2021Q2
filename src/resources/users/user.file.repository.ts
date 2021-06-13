@@ -1,5 +1,5 @@
+import db from '../../../db';
 import { TABLE_NAME_USERS } from '../../common/constants';
-import db from '../../db';
 import { findBy, merge, removeBy, replaceBy } from '../../helpers';
 import { IUser } from './user.types';
 
