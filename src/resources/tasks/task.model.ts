@@ -14,7 +14,7 @@ import { ITask } from 'src/resources/tasks/task.types';
  */
 
 /** Class representing a task. */
-class Task {
+class Task implements ITask {
   id: string | number | null;
   title: string;
   order: number;

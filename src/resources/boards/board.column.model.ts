@@ -10,7 +10,7 @@ import { IColumn } from './board.column.types';
  */
 
 /** Class representing a column. */
-class Column {
+class Column implements IColumn {
   id: string | number | null;
 
   title: string;

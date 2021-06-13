@@ -17,12 +17,20 @@ git clone {repository URL}
 npm install
 ```
 
+## Логи
+
+```
+./logs/*
+```
+
 ## Running application with JsonDb
 
 ```
 npm run start:filedb
 ```
+
 Внимание! Не запускайте тесты в этом режиме.
+
 ## Running application
 
 ```
