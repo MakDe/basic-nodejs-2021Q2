@@ -11,6 +11,30 @@
 git clone {repository URL}
 ```
 
+## Запуск при помощи докера
+
+```
+docker compose up
+```
+
+Для более старых версий
+
+```
+docker-compose up
+```
+
+Или скачать образ
+
+```
+docker pull makde/basic-nodejs-app
+```
+
+Затем запустить
+
+```
+docker run -p 8800:8800 makde/basic-nodejs-app
+```
+
 ## Installing NPM modules
 
 ```
