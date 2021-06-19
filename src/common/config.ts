@@ -5,23 +5,15 @@ dotenv.config({
   path: path.join(__dirname, '../../.env'),
 });
 
-const {
+export const {
   PORT,
   NODE_ENV,
   MONGO_CONNECTION_STRING,
   JWT_SECRET_KEY,
+  HOST,
+  DB_NAME,
+  DB_USER,
+  DB_PASSWORD,
+  DB_PORT,
   AUTH_MODE,
-  FILE_DB,
 } = process.env;
-
-const authMode = AUTH_MODE === 'true';
-const fileDb = FILE_DB === 'true';
-
-export {
-  PORT,
-  NODE_ENV,
-  MONGO_CONNECTION_STRING,
-  JWT_SECRET_KEY,
-  authMode as AUTH_MODE,
-  fileDb as FILE_DB,
-};

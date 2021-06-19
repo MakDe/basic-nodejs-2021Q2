@@ -36,6 +36,7 @@
       }
   },
   "rules": {
+      "dot-notation": "off",
       "import/extensions": "off",
       "no-param-reassign": "off",
       "lines-between-class-members": [
