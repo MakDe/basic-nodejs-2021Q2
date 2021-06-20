@@ -1,29 +1,39 @@
-import db from '../../../db';
-import { TABLE_NAME_USERS } from '../../common/constants';
-import { findBy, merge, removeBy, replaceBy } from '../../helpers';
+import { getManager } from 'typeorm';
 import { IUser } from './user.types';
+import User from './user.model';
 
 /** Get all users from db.
  * @return {Array<IUser>} - Users
  */
-const dbUsersGetAll = async (): Promise<Array<IUser>> =>
-  <Array<IUser>>db.get(TABLE_NAME_USERS);
+const dbUsersGetAll = async (): Promise<Array<IUser>> => {
+  const repo = getManager().getRepository(User);
+  const result = await repo.find();
+
+  return result;
+};
 
 /** Get user by id from db.
  * @param {string} value - User id
  * @return {IUser | null} - User
  */
-const dbUsersGetById = async (value: string): Promise<IUser | null> =>
-  findBy('id', value, <Array<IUser>>db.get(TABLE_NAME_USERS));
+const dbUsersGetById = async (value: string): Promise<IUser | null> => {
+  const repo = getManager().getRepository(User);
+  const result = await repo.findOne({ id: value });
+
+  return result || null;
+};
 
 /** Add user to db.
  * @param {IUser} data - Addable user
  * @return {IUser} - Added user
  */
 const dbUsersSet = async (data: IUser): Promise<IUser> => {
-  db.set(TABLE_NAME_USERS, merge(data, <Array<IUser>>db.get(TABLE_NAME_USERS)));
+  const repo = getManager().getRepository(User);
+  const user = await repo.create(data);
 
-  return data;
+  const result = await repo.save(user);
+
+  return result;
 };
 
 /** Delete user from db.
@@ -31,14 +41,12 @@ const dbUsersSet = async (data: IUser): Promise<IUser> => {
  * @return {IUser | null} - Removed user
  */
 const dbUsersRemoveById = async (value: string): Promise<IUser | null> => {
-  const removed = dbUsersGetById(value);
+  const repo = getManager().getRepository(User);
+  const removable = await repo.findOne({ id: value });
 
-  db.set(
-    TABLE_NAME_USERS,
-    removeBy('id', value, <Array<IUser>>db.get(TABLE_NAME_USERS))
-  );
+  await repo.delete({ id: value });
 
-  return removed;
+  return removable || null;
 };
 
 /** Update user in db.
@@ -50,15 +58,11 @@ const dbUsersUpdateById = async (
   value: string,
   newData: IUser
 ): Promise<IUser | null> => {
-  const data = replaceBy(
-    'id',
-    value,
-    newData,
-    <Array<IUser>>db.get(TABLE_NAME_USERS)
-  );
+  const repo = getManager().getRepository(User);
+  const found = await repo.findOne({ id: value });
 
-  if (data) {
-    db.set(TABLE_NAME_USERS, data);
+  if (found) {
+    await repo.save({ ...found, ...newData });
   }
 
   return dbUsersGetById(value);

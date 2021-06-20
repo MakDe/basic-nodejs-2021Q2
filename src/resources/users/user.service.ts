@@ -1,5 +1,5 @@
-import * as usersRepo from './user.file.repository';
-import * as tasksRepo from '../tasks/task.file.repository';
+import * as usersRepo from './user.repository';
+import * as tasksRepo from '../tasks/task.repository';
 import { IUser } from './user.types';
 
 /**
