@@ -1,7 +1,5 @@
-import { IColumn } from './board.column.types';
-
 export type IBoard = {
-  id?: string | number | null;
+  id: string;
   title: string;
-  columns: IColumn[];
+  columns: string;
 };
