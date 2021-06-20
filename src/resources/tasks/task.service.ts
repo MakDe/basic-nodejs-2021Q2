@@ -1,23 +1,20 @@
 import { ITask } from 'src/resources/tasks/task.types';
-import * as tasksRepo from './task.file.repository';
+import * as tasksRepo from './task.repository';
 
 /**
  * Get all tasks.
  * @param {string} boardId - Board id
  * @return {Promise<Array<ITask>>} - Get all tasks
  */
-const getTasks = (boardId: string): Promise<Array<ITask>> =>
-  tasksRepo.getAll(boardId);
+const getTasks = (): Promise<Array<ITask>> => tasksRepo.getAll();
 
 /** Get task by id.
  * @param {string} boardId - Board id
  * @param {string} taskId - Task id
  * @return {Promise<ITask | null | undefined>} - Task
  */
-const getTask = (
-  boardId: string,
-  taskId: string
-): Promise<ITask | null | undefined> => tasksRepo.getById(boardId, taskId);
+const getTask = (boardId: string): Promise<ITask | null | undefined> =>
+  tasksRepo.getById(boardId);
 
 /**
  * Add task.

@@ -1,10 +1,11 @@
-import { v1 as uuidv1 } from 'uuid';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { v4 as uuidv1 } from 'uuid';
 import { ITask } from 'src/resources/tasks/task.types';
 
 /**
  * Task Interface.
  * @typedef ITask
- * @prop {string|number|null|undefined} id - Task id
+ * @prop {string} id - Task id
  * @prop {string} title - Task title
  * @prop {number} order - Task order
  * @prop {string} description - Task description
@@ -14,27 +15,44 @@ import { ITask } from 'src/resources/tasks/task.types';
  */
 
 /** Class representing a task. */
+@Entity('task')
 class Task implements ITask {
-  id: string | number | null;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column()
   title: string;
+
+  @Column()
   order: number;
+
+  @Column()
   description: string;
-  userId: string | number | null;
-  boardId: string | number | null;
-  columnId: string | number | null;
+
+  @Column({ type: 'varchar', nullable: true })
+  userId!: string | null;
+
+  @Column()
+  boardId: string;
+
+  @Column({ nullable: true })
+  columnId!: string;
+
   /**
    * Create a task.
    * @param {ITask} ITask - Task interface
    */
-  constructor({
-    id = uuidv1(),
-    title = '',
-    order = 0,
-    description = '',
-    userId = '',
-    boardId = '',
-    columnId = '',
-  }: ITask) {
+  constructor(
+    {
+      id = uuidv1(),
+      title = '',
+      order = 0,
+      description = '',
+      userId = '',
+      boardId = '',
+      columnId = '',
+    } = {} as ITask
+  ) {
     /**
      * Task id.
      * @type {string|number|null}
