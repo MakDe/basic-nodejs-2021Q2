@@ -11,6 +11,12 @@
 git clone {repository URL}
 ```
 
+## Устанавливаем зависимости
+
+```
+npm install
+```
+
 ## Настраиваете подключение к чистой базе
 
 ```
@@ -73,11 +79,6 @@ docker pull makde/basic-nodejs-app
 docker run -p 8800:8800 makde/basic-nodejs-app
 ```
 
-## Installing NPM modules
-
-```
-npm install
-```
 
 ## Логи
 
@@ -85,13 +86,6 @@ npm install
 ./logs/*
 ```
 
-## Running application with JsonDb
-
-```
-npm run start:filedb
-```
-
-Внимание! Не запускайте тесты в этом режиме.
 
 ## Running application
 
