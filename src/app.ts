@@ -6,8 +6,10 @@ import cors from 'cors';
 import userRouter from './resources/users/user.router';
 import boardRouter from './resources/boards/board.router';
 import taskRouter from './resources/tasks/task.router';
+import authRouter from './resources/auth/auth.router';
 import loggerMiddleware from './middlewares/requestLogger';
 import errorHandleMiddleware from './middlewares/errorHandler';
+import authMiddleware from './middlewares/authChecker';
 import logger from './logger';
 
 const app = express();
@@ -28,6 +30,9 @@ app.use('/', (req, res, next) => {
   }
   next();
 });
+app.use('/login', authRouter);
+
+app.use(authMiddleware);
 
 app.use('/users', userRouter);
 app.use('/boards', boardRouter);
