@@ -1,6 +1,14 @@
+import bcrypt from 'bcrypt';
 import * as usersRepo from './user.repository';
 import * as tasksRepo from '../tasks/task.repository';
 import { IUser } from './user.types';
+
+const hashPassword = async (password: string): Promise<string> => {
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+
+  return hash;
+};
 
 /**
  * Get all users.
@@ -19,7 +27,15 @@ const getUser = (id: string): Promise<IUser | null> => usersRepo.getById(id);
  * @param {IUser} user - Addable user
  * @return {Promise<IUser>} - Added user
  */
-const setUser = (user: IUser): Promise<IUser> => usersRepo.set(user);
+const setUser = async (user: IUser): Promise<IUser> => {
+  const { password } = user;
+
+  if (password) {
+    user.password = await hashPassword(password);
+  }
+
+  return usersRepo.set(user);
+};
 
 /**
  * Delete user.
@@ -38,7 +54,14 @@ const removeUser = (id: string): Promise<IUser | null> => {
  * @param {IUser} data - Updatable user
  * @return {Promise<IUser | null>} - Updated user
  */
-const updateUser = (id: string, data: IUser): Promise<IUser | null> =>
-  usersRepo.updateById(id, data) || null;
+const updateUser = async (id: string, data: IUser): Promise<IUser | null> => {
+  const { password } = data;
+
+  if (password) {
+    data.password = await hashPassword(password);
+  }
+
+  return usersRepo.updateById(id, data) || null;
+};
 
 export { getUsers, getUser, setUser, removeUser, updateUser };

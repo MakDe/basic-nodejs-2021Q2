@@ -68,10 +68,18 @@ const dbUsersUpdateById = async (
   return dbUsersGetById(value);
 };
 
+const dbUsersGetByLogin = async (value: string): Promise<IUser | null> => {
+  const repo = getManager().getRepository(User);
+  const result = await repo.findOne({ login: value });
+
+  return result || null;
+};
+
 export {
   dbUsersGetAll as getAll,
   dbUsersGetById as getById,
   dbUsersSet as set,
   dbUsersRemoveById as removeById,
   dbUsersUpdateById as updateById,
+  dbUsersGetByLogin as getByLogin,
 };
