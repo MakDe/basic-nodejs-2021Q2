@@ -1,3 +1,9 @@
+/* eslint-disable import/no-cycle */
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column as ColumnTypeOrm,
+} from 'typeorm';
 import { v1 as uuidv1 } from 'uuid';
 import { IColumn } from './board.column.types';
 
@@ -10,17 +16,22 @@ import { IColumn } from './board.column.types';
  */
 
 /** Class representing a column. */
+@Entity('column')
 class Column implements IColumn {
-  id: string | number | null;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
+  @ColumnTypeOrm('text')
   title: string;
 
+  @ColumnTypeOrm('integer')
   order: number;
+
   /**
    * Create a column.
    * @param {IColumn} IColumn - Column interface
    */
-  constructor({ id = uuidv1(), title = '', order = 0 }: IColumn) {
+  constructor({ id = uuidv1(), title = '', order = 0 } = {}) {
     /**
      * Column id.
      * @type {string|number|null}

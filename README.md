@@ -11,11 +11,74 @@
 git clone {repository URL}
 ```
 
-## Installing NPM modules
+## Устанавливаем зависимости
 
 ```
 npm install
 ```
+
+## Настраиваете подключение к чистой базе
+
+```
+.env
+```
+
+## Генерируете миграции
+
+```
+npm run migration-generate
+```
+
+## Накатываете миграции
+
+```
+npm run migration-run
+```
+
+## Стартуете приложение
+
+```
+npm start
+```
+
+## Запускаете тесты
+
+```
+npm run test
+```
+
+## Если нужно, то можно миграции откатить
+
+```
+npm run migration-revert
+```
+
+Настроить докер не успел, но в 7-м задании ничего про это не сказано, поэтому и штрафов быть не должно по идее.
+
+## Запуск при помощи докера (не сконфигугирован для 7-го задания)
+
+```
+docker compose up
+```
+
+Для более старых версий
+
+```
+docker-compose up
+```
+
+Или скачать образ
+
+```
+docker pull makde/basic-nodejs-app
+```
+
+Затем запустить
+
+```
+docker run -p 8800:8800 makde/basic-nodejs-app
+```
+
 
 ## Логи
 
@@ -23,13 +86,6 @@ npm install
 ./logs/*
 ```
 
-## Running application with JsonDb
-
-```
-npm run start:filedb
-```
-
-Внимание! Не запускайте тесты в этом режиме.
 
 ## Running application
 

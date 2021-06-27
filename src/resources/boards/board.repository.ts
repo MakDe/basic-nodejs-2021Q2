@@ -1,34 +1,37 @@
-import { TABLE_NAME_BOARDS } from '../../common/constants';
-import db from '../../db';
-import { findBy, merge, removeBy, replaceBy } from '../../helpers';
+import { getManager } from 'typeorm';
 import { IBoard } from './board.types';
+import Board from './board.model';
 
 /** Get all boards from db.
  * @return {Array<IBoard>} - Boards
  */
-const dbBoardsGetAll = async (): Promise<Array<IBoard>> =>
-  <Array<IBoard>>db.get(TABLE_NAME_BOARDS);
+const dbBoardsGetAll = async (): Promise<Array<IBoard>> => {
+  const repo = getManager().getRepository(Board);
+  const result = await repo.find();
+
+  return result;
+};
 
 /** Get board by id from db.
- * @param {string | number | null | undefined} value - Board id
+ * @param {string | number | null} value - Board id
  * @return {IBoard | null} - Board
  */
-const dbBoardsGetById = async (
-  value: string | number | null | undefined
-): Promise<IBoard | null> =>
-  findBy('id', value, <Array<IBoard>>db.get(TABLE_NAME_BOARDS));
+const dbBoardsGetById = async (value: string): Promise<IBoard | null> => {
+  const repo = getManager().getRepository(Board);
+  const result = await repo.findOne({ id: value });
+
+  return result || null;
+};
 
 /** Add board to db.
  * @param {IBoard} data - Addable board
  * @return {IBoard} - Added board
  */
 const dbBoardsSet = async (data: IBoard): Promise<IBoard> => {
-  db.set(
-    TABLE_NAME_BOARDS,
-    merge(data, <Array<IBoard>>db.get(TABLE_NAME_BOARDS))
-  );
+  const repo = getManager().getRepository(Board);
+  const board = await repo.create(data);
 
-  return data;
+  return repo.save(board);
 };
 
 /** Delete board from db.
@@ -36,14 +39,12 @@ const dbBoardsSet = async (data: IBoard): Promise<IBoard> => {
  * @return {IBoard | null} - Removed board
  */
 const dbBoardsRemoveById = async (value: string): Promise<IBoard | null> => {
-  const removed = dbBoardsGetById(value);
+  const repo = getManager().getRepository(Board);
+  const removable = await repo.findOne({ id: value });
 
-  db.set(
-    TABLE_NAME_BOARDS,
-    removeBy('id', value, <Array<IBoard>>db.get(TABLE_NAME_BOARDS))
-  );
+  await repo.delete({ id: value });
 
-  return removed;
+  return removable || null;
 };
 
 /** Update board in db.
@@ -52,18 +53,14 @@ const dbBoardsRemoveById = async (value: string): Promise<IBoard | null> => {
  * @return {IBoard | null} - Updated Board
  */
 const dbBoardsUpdateById = async (
-  value: string | number | null | undefined,
+  value: string,
   newData: IBoard
 ): Promise<IBoard | null> => {
-  const data = replaceBy(
-    'id',
-    value,
-    newData,
-    <Array<IBoard>>db.get(TABLE_NAME_BOARDS)
-  );
+  const repo = getManager().getRepository(Board);
+  const found = await repo.findOne({ id: value });
 
-  if (data) {
-    db.set(TABLE_NAME_BOARDS, data);
+  if (found) {
+    await repo.save({ ...found, ...newData });
   }
 
   return dbBoardsGetById(value);

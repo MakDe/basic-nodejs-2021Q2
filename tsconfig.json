@@ -22,5 +22,5 @@
     "baseUrl": "."
   },
   "exclude": ["node_modules/", "build", "test", "doc", "docs"],
-  "include": ["./src/**/*.ts"]
+  "include": ["./src/**/*.ts", "./db/index.ts"]
 }

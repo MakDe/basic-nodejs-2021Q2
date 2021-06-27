@@ -7,9 +7,9 @@ const router = express.Router({ mergeParams: true });
 /**
  * Get tasks
  */
-router.route('/:boardId/tasks').get(async (req, res, next) => {
+router.route('/:boardId/tasks').get(async (_req, res, next) => {
   try {
-    const tasks = await taskService.getTasks(req.params.boardId);
+    const tasks = await taskService.getTasks();
 
     await res.json(tasks);
   } catch (e) {
@@ -22,7 +22,7 @@ router.route('/:boardId/tasks').get(async (req, res, next) => {
  */
 router.route('/:boardId/tasks/:id').get(async (req, res, next) => {
   try {
-    const task = await taskService.getTask(req.params.boardId, req.params.id);
+    const task = await taskService.getTask(req.params.id);
 
     res.status(task ? 200 : 404).send(task);
   } catch (e) {

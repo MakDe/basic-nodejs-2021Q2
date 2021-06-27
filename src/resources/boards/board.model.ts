@@ -1,7 +1,11 @@
+/* eslint-disable import/no-cycle */
+import {
+  Entity,
+  Column as ColumnTypeOrm,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { v1 as uuidv1 } from 'uuid';
-import { IColumn } from 'src/resources/boards/board.column.types';
 import { IBoard } from 'src/resources/boards/board.types';
-import Column from './board.column.model';
 
 /**
  * Board interface.
@@ -12,17 +16,22 @@ import Column from './board.column.model';
  */
 
 /** Class representing a board. */
+@Entity('board')
 class Board implements IBoard {
-  id: string | number | null;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
+  @ColumnTypeOrm()
   title: string;
 
-  columns: IColumn[];
+  @ColumnTypeOrm({ type: 'json', nullable: true })
+  columns: string;
+
   /**
    * Create a board.
    * @param {IBoard} IBoard - Board interface
    */
-  constructor({ id = uuidv1(), title = '', columns }: IBoard) {
+  constructor({ id = uuidv1(), title = '', columns = '' } = {}) {
     /**
      * Board id.
      * @type {string|number|null}
@@ -37,10 +46,7 @@ class Board implements IBoard {
      * Board columns.
      * @type {Array<IColumn>}
      */
-    this.columns = columns.map(
-      (item) =>
-        new Column({ id: item.id, title: item.title, order: item.order })
-    );
+    this.columns = columns;
   }
 
   /**

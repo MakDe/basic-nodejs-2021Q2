@@ -1,10 +1,11 @@
-import { v1 as uuidv1 } from 'uuid';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { v4 as uuidv1 } from 'uuid';
 import { IUser, IUserHidden } from './user.types';
 
 /**
  * User interface.
  * @typedef IUser
- * @prop {string|number|null} id - User id
+ * @prop {string} id - User id
  * @prop {string} name - User name
  * @prop {string} login - User login
  * @prop {string} password - User password
@@ -13,29 +14,34 @@ import { IUser, IUserHidden } from './user.types';
 /**
  * User interface without public properties.
  * @typedef IUserHidden
- * @prop {string|number|null} id - User id
+ * @prop {string} id - User id
  * @prop {string} name - User name
  * @prop {string} login - User login
  */
 
 /** Class representing a user. */
-class User {
-  id: string | number | null;
+@Entity('user')
+class User implements IUser {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
+  @Column()
   name: string;
 
+  @Column()
   login: string;
 
+  @Column()
   password: string;
 
   /**
    * Create a user.
    * @param {IUser} IUser - User interface
    */
-  constructor({ id = uuidv1(), name = '', login = '', password = '' }: IUser) {
+  constructor({ id = uuidv1(), name = '', login = '', password = '' } = {}) {
     /**
      * User id.
-     * @type {string|number|null}
+     * @type {string}
      */
     this.id = id;
     /**

@@ -1,6 +1,6 @@
 import { IBoard } from 'src/resources/boards/board.types';
-import * as boardRepo from './board.file.repository';
-import * as tasksRepo from '../tasks/task.file.repository';
+import * as boardRepo from './board.repository';
+import * as tasksRepo from '../tasks/task.repository';
 
 /**
  * Get all boards.
@@ -26,8 +26,8 @@ const setBoard = (board: IBoard): Promise<IBoard> => boardRepo.set(board);
  * @param {string} id - Board id
  * @return {Promise<IBoard | null>} - Removed board
  */
-const removeBoard = (id: string): Promise<IBoard | null> => {
-  tasksRepo.removeById(id);
+const removeBoard = async (id: string): Promise<IBoard | null> => {
+  await tasksRepo.removeById(id);
 
   return boardRepo.removeById(id);
 };

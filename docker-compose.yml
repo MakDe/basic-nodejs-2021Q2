@@ -1,0 +1,40 @@
+version: '2'
+services:
+  node:
+    build: .
+    image: makde/basic-nodejs-app
+    container_name: node
+    restart: always
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - postgres
+    volumes:
+      - ./logs:/usr/app/logs
+      - ./db:/usr/app/db
+      - ./src:/usr/app/src
+    environment:
+      PORT: ${PORT}
+    networks:
+      - custom-network
+  postgres:
+    build: ./db/
+    image: makde/basic-nodejs-db
+    container_name: database
+    restart: always
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    volumes:
+      - ./postgres_logs:/logs:z
+      - ./postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PORT: ${DB_PORT}
+    networks:
+      - custom-network
+
+networks:
+  custom-network:
+    driver: bridge
