@@ -16,7 +16,7 @@
     "migration-generate": "cross-env npm run typeorm migration:generate -- -n restService",
     "migration-run": "cross-env npm run typeorm migration:run",
     "migration-revert": "cross-env npm run typeorm migration:revert"
-  },
+  }, 
   "keywords": [
     "rs",
     "school",
